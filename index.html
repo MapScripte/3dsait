@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПішінLab — Идеяға пішін береміз! | 3D дизайн және тапсырыспен бұйым жасау</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --surface-color: #ffffff;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+            --primary: #0066ff;
+            --primary-hover: #0052cc;
+            --accent-blue: #38bdf8;
+            --border-color: #e2e8f0;
+            --graphite: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--graphite);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--graphite);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--graphite);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .hero-image {
+            background: var(--border-color);
+            border-radius: 16px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-muted);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-img {
+            height: 220px;
+            background: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--graphite);
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Interactive Studio Signature Section */
+        .signature-studio {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--graphite);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-color);
+        }
+
+        .preview-box {
+            background: var(--bg-color);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .preview-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            position: absolute;
+            transition: all 0.2s;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .step-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            flex: 1;
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Calculator section */
+        .calculator-box {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calc-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--graphite);
+        }
+
+        footer {
+            background: var(--graphite);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero, .signature-studio {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Мәзір -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Пішін<span>Lab</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#bastyny">Басты бет</a></li>
+                    <li><a href="#qyzmetter">Қызметтер</a></li>
+                    <li><a href="#qoltanba">Авторлық қолтаңба</a></li>
+                    <li><a href="#qalyptar">Қалыптар</a></li>
+                    <li><a href="#katalog">Каталог</a></li>
+                    <li><a href="#bagasy">Бағаны есептеу</a></li>
+                    <li><a href="#tapsyrys">Тапсырыс беру</a></li>
+                    <li><a href="#baylanis">Байланыс</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Басты бет -->
+    <section id="bastyny" class="hero" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="hero-content">
+            <h1>Сіздің идеяңыз — біздің қолтаңбамызбен жасалған бұйым</h1>
+            <p>Жеке 3D дизайн, авторлық өнімдер, қалыптар және өлшемге сай бөлшектер.</p>
+            <div class="btn-group">
+                <a href="#tapsyrys" class="btn">Өз бұйымыма тапсырыс беру</a>
+                <a href="#katalog" class="btn btn-outline">Жұмыстарды көру</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Шынайы 3D өндіріс тақырыбына сәйкес сапалы фото -->
+            <img src="https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?auto=format&fit=crop&w=800&q=80" alt="3D принтердің жанында дайын тұрған сапалы авторлық бұйым және әзірлеу процесі">
+        </div>
+    </section>
+
+    <!-- Қызметтер -->
+    <section id="qyzmetter">
+        <h2>Қызметтер</h2>
+        <p class="section-desc">Сіздің қажеттілігіңізге сай жоғары дәлдіктегі 3D өндіріс қызметтері</p>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-img">
+                    <img src="Авторлық қолтаңбасы бар бұйымдар.png" alt="Авторлық қолтаңбасы бар бұйымдар">
+                </div>
+                <div class="card-body">
+                    <h3>Авторлық қолтаңбасы бар бұйымдар</h3>
+                    <p>Клиенттің аты, жазуы, логотипі, ұлттық өрнегі немесе авторлық белгісі енгізілген жеке заттар.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Жеке 3D дизайн.png" alt="Жеке 3D дизайн">
+                </div>
+                <div class="card-body">
+                    <h3>Жеке 3D дизайн</h3>
+                    <p>Клиенттің идеясын сызбадан немесе сипаттамадан дайын бұйымға айналдыру.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Сынған бөлшекті қайта жасау.png" alt="Сынған бөлшекті қайта жасау">
+                </div>
+                <div class="card-body">
+                    <h3>Сынған бөлшекті қайта жасау</h3>
+                    <p>Тұтқа, қақпақ, түйме, бекіткіш, шағын корпус және басқа пластик бөлшектер.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Автокөлік салонына арналған бұйымдар.png" alt="Автокөлік салонына арналған бұйымдар">
+                </div>
+                <div class="card-body">
+                    <h3>Автокөлік салонына арналған бұйымдар</h3>
+                    <p>Органайзер, сәндік қақпақ, батырма және интерьердің шағын бөлшектері. (Қауіпсіздік жүйелеріне қатысты бөлшектер қабылданбайды).</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Қалыптар мен шебер-модельдер.png" alt="Қалыптар мен шебер-модельдер">
+                </div>
+                <div class="card-body">
+                    <h3>Қалыптар мен шебер-модельдер</h3>
+                    <p>Шам, сабын, гипс декоры, сувенир үшін пішіндер және силикон қалып алуға арналған 3D үлгілер.</p>
+                    <a href="#qalyptar" class="btn" style="text-align: center;">Толығырақ</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Бизнеске арналған өнімдер.png" alt="Бизнеске арналған өнімдер">
+                </div>
+                <div class="card-body">
+                    <h3>Бизнеске арналған өнімдер</h3>
+                    <p>Логотипі бар QR тұғырлар, үстел нөмірлері, витрина бұйымдары, брендтік сыйлықтар.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Оқу құралдары.png" alt="Оқу құралдары">
+                </div>
+                <div class="card-body">
+                    <h3>Оқу құралдары</h3>
+                    <p>Тактильді әріптер, геометриялық денелер, механизмдер мен оқу макеттері.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Шағын сериялы өндіріс.png" alt="Шағын сериялы өндіріс">
+                </div>
+                <div class="card-body">
+                    <h3>Шағын сериялы өндіріс</h3>
+                    <p>Бір рет келісілген дизайн бойынша бірнеше дана бұйым жасау.</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center;">Тапсырыс беру</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Авторлық қолтаңба бөлімі -->
+    <section id="qoltanba">
+        <h2>Әр бұйымда сіздің тарихыңыз бар</h2>
+        <p class="section-desc">Өз өніміңізге жеке қолтаңба, есім немесе ою-өрнек қосып бейімдеңіз</p>
+        
+        <div class="signature-studio">
+            <div>
+                <div class="form-group">
+                    <label>Өзіңіздің есіміңіз немесе мәтініңіз</label>
+                    <input type="text" id="sigTextInput" class="form-control" value="ПішінLab" placeholder="Мәтінді енгізіңіз...">
+                </div>
+                <div class="form-group">
+                    <label>Орналасуы</label>
+                    <select id="sigPosition" class="form-control">
+                        <option value="front">Алдыңғы беті</option>
+                        <option value="back">Артқы беті</option>
+                        <option value="side">Қыры</option>
+                        <option value="bottom">Түбі</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Жазу түсі</label>
+                    <input type="color" id="sigColor" value="#0066ff" style="width: 100%; height: 40px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;">
+                </div>
+                <div class="form-group">
+                    <label>Қолтаңба / Логотип файлы (Ақ фондағы фото немесе PNG)</label>
+                    <input type="file" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+                    <input type="checkbox" id="legalCheck" required style="width: 18px; height: 18px;">
+                    <label for="legalCheck" style="font-size: 0.9rem; margin-bottom: 0;">Бұл қолтаңбаны немесе логотипті пайдалануға толық құқығым бар екенін растаймын.</label>
+                </div>
+            </div>
+            <div class="preview-box" id="previewBox">
+                <div style="position: absolute; top: 1rem; left: 1rem; font-size: 0.85rem; color: var(--text-muted);">Алдын ала көрініс</div>
+                <!-- Нақты өнім үлгісіне ұқсас фото -->
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" alt="Қолтаңба бедерленген 3D өнім" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; opacity: 0.7;">
+                <div id="liveTextPreview" class="preview-text">ПішінLab</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог -->
+    <section id="katalog">
+        <h2>Каталог</h2>
+        <p class="section-desc">Дайын авторлық өнімдер мен санаттар</p>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-img">
+                    <img src="Авторлық сыйлықтар Есімі бар кілт салғыш.png" alt="Есімі бар кілт салғыш">
+                </div>
+                <div class="card-body">
+                    <h3>Авторлық сыйлықтар: Есімі бар кілт салғыш</h3>
+                    <p>Жеке атау немесе ұлттық өрнекпен жасалатын берік кілт салғыш.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: 60x25x4 мм | Түстер: Қара, Көк, Сұр</p>
+                    <a href="#tapsyrys" class="btn" style="text-align: center; margin-top: auto;">Өзіме бейімдеу</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Үй және интерьер Өсімдік құмырасының сәндік қабы.png" alt="Өсімдік құмырасының сәндік қабы">
+                </div>
+                <div class="card-body">
+                    <h3>Үй және интерьер: Өсімдік құмырасының сәндік қабы</h3>
+                    <p>Заманауи стильдегі геометриялық өсімдік қабы.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: 120x120x110 мм | Түстер: Ақ, Графит</p>
+                    <a href="#bagasy" class="btn btn-outline" style="text-align: center; margin-top: auto;">Бағасын есептеу</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Автокөлік Салон органайзері.png" alt="Автокөлік салон органайзері">
+                </div>
+                <div class="card-body">
+                    <h3>Автокөлік: Салон органайзері</h3>
+                    <p>Көлік консоліне дәл орналасатын ықшам зат сақтағыш.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: 180x80x50 мм | Түс: Қара матовая</p>
+                    <a href="#bagasy" class="btn btn-outline" style="text-align: center; margin-top: auto;">Бағасын есептеу</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Бизнес QR тұғыр.png" alt="QR тұғыр">
+                </div>
+                <div class="card-body">
+                    <h3>Бизнес: QR тұғыр</h3>
+                    <p>Компания логотипі мен төлем немесе меню QR коды бар арнайы тұғыр.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: 100x150 мм | Бренд түсіне сай</p>
+                    <a href="#bagasy" class="btn btn-outline" style="text-align: center; margin-top: auto;">Бағасын есептеу</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Білім Тактильді әріптер.png" alt="Тактильді әріптер">
+                </div>
+                <div class="card-body">
+                    <h3>Білім: Тактильді әріптер</h3>
+                    <p>Балаларға арналған қолмен ұстап үйренуге ыңғайлы бедерлі әріптер жиынтығы.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: 50x50 мм (әр әріп)</p>
+                    <a href="#bagasy" class="btn btn-outline" style="text-align: center; margin-top: auto;">Бағасын есептеу</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="Қалыптар Шамға арналған шебер-модель.png" alt="Шамға арналған шебер-модель">
+                </div>
+                <div class="card-body">
+                    <h3>Қалыптар: Шамға арналған шебер-модель</h3>
+                    <p>Силикон қалып құюға арналған мінсіз геометриялы шебер-үлгі.</p>
+                    <p style="font-size: 0.85rem; font-weight: 500;">Өлшем: Тапсырыс бойынша</p>
+                    <a href="#qalyptar" class="btn btn-outline" style="text-align: center; margin-top: auto;">Қалыптар туралы</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Қалыптар бөлімі -->
+    <section id="qalyptar">
+        <h2>Қалыптар мен шебер-модельдер жасау</h2>
+        <p class="section-desc">Шам, сабын және гипс декорына арналған сапалы қалыптарды алу кезеңдері</p>
+        
+        <div class="process-steps">
+            <div class="step-card">
+                <span class="step-num">1</span>
+                <h4>Идея / Эскиз</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Сіздің сызбаңыз немесе фотоңыз</p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">2</span>
+                <h4>3D шебер-модель</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Длдікпен жобалау</p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">3</span>
+                <h4>Қалып</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Силикон немесе пластик пішін</p>
+            </div>
+            <div class="step-card">
+                <span class="step-num">4</span>
+                <h4>Дайын бұйым</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Шам, сабын немесе гипс декор</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; background: var(--surface-color); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px;">
+            <h3 style="margin-bottom: 1rem; color: var(--graphite);">Маңызды ескерту</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Клиент қалыптың қандай материал үшін және қанша рет қолданылатынын алдын ала көрсетуі қажет. <strong>Тағаммен жанасатын қалыптар үшін</strong> материал мен жасау әдісі бөлек келісуді талап етеді.</p>
+        </div>
+    </section>
+
+    <!-- Бағаны алдын ала есептеу -->
+    <section id="bagasy">
+        <h2>Бағаны алдын ала есептеу</h2>
+        <p class="section-desc">Бұйымыңыздың шамамен құнын бірнеше қадамда анықтаңыз</p>
+        
+        <div class="calculator-box">
+            <div class="form-group">
+                <label>Өнім түрі</label>
+                <select id="calcType" class="form-control">
+                    <option value="1500">Авторлық бұйым / Кілт салғыш</option>
+                    <option value="3500">Жеке 3D дизайн және бөлшек</option>
+                    <option value="5000">Автокөлік салонының органайзері</option>
+                    <option value="4000">Бизнеске арналған QR тұғыр</option>
+                    <option value="6000">Шам немесе сабын қалыбы (шебер-модель)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Дана саны</label>
+                <input type="number" id="calcQty" class="form-control" value="1" min="1">
+            </div>
+            <div class="form-group">
+                <label>Материал мен әрлеу</label>
+                <select id="calcMaterial" class="form-control">
+                    <option value="1">Стандартты эко-пластик (PLA)</option>
+                    <option value="1.3">Жоғары берік пластик (PETG / ABS)</option>
+                    <option value="1.5">Премиум күшейтілген материал</option>
+                </select>
+            </div>
+            <button type="button" class="btn" onclick="calculatePrice()" style="width: 100%; margin-top: 1rem;">Құнын есептеу</button>
+            
+            <div class="calc-result" id="calcResultDisplay">
+                Шамамен құны: 1 500 ₸
+            </div>
+            <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">* Нақты баға өлшем мен файл тексерілгеннен кейін бекітіледі. Нақты төлем жүйесі қосылмағандықтан, бұл жерде ақша алынбайды.</p>
+        </div>
+    </section>
+
+    <!-- Фото арқылы тапсырыс беру -->
+    <section id="tapsyrys">
+        <h2>Фото арқылы тапсырыс беру</h2>
+        <p class="section-desc">Сынған бөлшектің немесе жаңа идеяңыздың 2–3 фотосын жүктеп, өтінім жіберіңіз</p>
+        
+        <div class="calculator-box">
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Тапсырыс түрі</label>
+                    <select class="form-control" required>
+                        <option value="author">Авторлық бұйым</option>
+                        <option value="part">Сынған бөлшекті қайта жасау</option>
+                        <option value="mold">Қалып / Шебер-модель</option>
+                        <option value="series">Шағын сериялы өндіріс</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Сипаттама (не жасау керек?)</label>
+                    <textarea class="form-control" rows="4" placeholder="Толық мәлімет жазыңыз..." required></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Өлшемдері (мм-мен)</label>
+                        <input type="text" class="form-control" placeholder="Мысалы: 100x50x30 мм" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Қажет дана саны</label>
+                        <input type="number" class="form-control" value="1" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Түс пен материалға қалауыңыз</label>
+                    <input type="text" class="form-control" placeholder="Мысалы: Қара түс, берік пластик">
+                </div>
+                <div class="form-group">
+                    <label>Фото немесе 3D файл жүктеу (2–3 сурет)</label>
+                    <input type="file" class="form-control" multiple accept="image/*,.stl,.obj" required>
+                </div>
+                <div class="form-group">
+                    <label>Байланыс ақпараты (Телефон немесе WhatsApp)</label>
+                    <input type="text" class="form-control" placeholder="+7 (...)" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Тапсырысты жіберу</button>
+            </form>
+            <div id="orderSuccessMsg" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #d4edda; color: #155724; border-radius: 8px; text-align: center; font-weight: 500;">
+                Өтініміңіз қабылданды! Тапсырыс нөмірі: #PL-8942. Өтінім тек осы құрылғыда сақталды. 
+                <br><button onclick="downloadOrderFile()" class="btn" style="margin-top: 0.75rem; font-size: 0.85rem; padding: 0.5rem 1rem;">Тапсырыс мәліметтерін файл ретінде жүктеу</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Байланыс -->
+    <section id="baylanis">
+        <h2>Байланыс</h2>
+        <p class="section-desc">Орал қаласы, Қазақстан. Басқа қалалардан да тапсырыс қабылдаймыз.</p>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto; background: var(--surface-color); border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 16px;">
+            <p style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--graphite);"><strong>Студия орналасқан қала:</strong> Орал, Қазақстан</p>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Басқа аймақтарға пошта немесе курьерлік қызмет арқылы жеткізу қарастырылған.</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">WhatsApp желісі: +7 778 007 92 86</p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-weight: 700; font-size: 1.2rem; color: white; margin-bottom: 0.5rem;">ПішінLab — Идеяға пішін береміз!</p>
+            <p>© 2026 Барлық құқықтар қорғалған. Орал, Қазақстан.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive live preview for signature
+        const sigTextInput = document.getElementById('sigTextInput');
+        const liveTextPreview = document.getElementById('liveTextPreview');
+        const sigColor = document.getElementById('sigColor');
+
+        if(sigTextInput && liveTextPreview) {
+            sigTextInput.addEventListener('input', (e) => {
+                liveTextPreview.textContent = e.target.value || 'ПішінLab';
+            });
+            sigColor.addEventListener('input', (e) => {
+                liveTextPreview.style.color = e.target.value;
+            });
+        }
+
+        // Price calculator
+        function calculatePrice() {
+            const typePrice = parseFloat(document.getElementById('calcType').value);
+            const qty = parseInt(document.getElementById('calcQty').value) || 1;
+            const matMultiplier = parseFloat(document.getElementById('calcMaterial').value);
+            
+            const total = Math.round(typePrice * qty * matMultiplier);
+            document.getElementById('calcResultDisplay').textContent = `Шамамен құны: ${total.toLocaleString()} ₸`;
+        }
+
+        // Order submission simulation
+        function submitOrder(e) {
+            e.preventDefault();
+            document.getElementById('orderSuccessMsg').style.display = 'block';
+            document.getElementById('orderForm').reset();
+        }
+
+        // Download order data file if server is not connected
+        function downloadOrderFile() {
+            const data = "ПішінLab тапсырыс мәліметтері\nТапсырыс нөмірі: #PL-8942\nҚала: Орал, Қазақстан\nКүйі: Құрылғыда сақталды";
+            const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Tapsyrys_PishinLab.txt';
+            a.click();
+        }
+    </script>
+</body>
+</html>
